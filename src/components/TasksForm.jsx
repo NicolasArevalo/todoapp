@@ -16,11 +16,13 @@ const TasksForm = () => {
 	const email = useEffect(() => {
 		const { email } = getUser()
 		return email
-	}, []).split('@')
+	}, [])
+
+	const emailSplited = email.split('@')
 
 	return (
 		<div>
-			<p>Hola, {email[0]}</p>
+			<p>Hola, {emailSplited[0]}</p>
 			<form onSubmit={handleSubmit}>
 				<input
 					type='text'
