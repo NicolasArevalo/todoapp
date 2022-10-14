@@ -20,9 +20,7 @@ const TasksForm = () => {
 					placeholder='Escribe una tarea'
 					ref={input}
 				/>
-				<button disabled={adding}>
-					{adding ? 'Agregando...':'Agregar'}
-				</button>
+				<button disabled={adding}>{adding ? 'Agregando...' : 'Agregar'}</button>
 			</form>
 		</div>
 	)

@@ -1,5 +1,5 @@
-import { useState, useEffect, useContext, useRef } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { useState, useEffect, useRef } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 import { supabase } from '../Backend/client'
 import TasksForm from '../components/TasksForm'
@@ -7,35 +7,52 @@ import TasksList from '../components/TasksList'
 
 const Home = () => {
 	const navigate = useNavigate()
-    const modal = useRef()
-    const exitModal = useRef()
+	const modal = useRef()
+	const exitModal = useRef()
 
-    const toggleModal = cualModal =>{
-        if(cualModal==='nav'){ 
-            if(modal.current.open){
-                modal.current.close()
-            } else{
-                modal.current.open = 'true'
-            }
-        }else{
-            if(exitModal.current.open){
-                exitModal.current.close()
-            } else{
-                exitModal.current.open = 'true'
-            }
-        }
-    }
-    
+	const [validandoUser, setValidandoUser] = useState(false)
+
+	const toggleModal = cualModal => {
+		if (cualModal === 'nav') {
+			if (modal.current.open) {
+				modal.current.close()
+			} else {
+				modal.current.open = 'true'
+			}
+		} else {
+			if (exitModal.current.open) {
+				exitModal.current.close()
+			} else {
+				exitModal.current.open = 'true'
+			}
+		}
+	}
 
 	useEffect(() => {
 		async function isRedirectable() {
+			setValidandoUser(true)
 			const {
 				data: { user },
 			} = await supabase.auth.getUser()
+			setValidandoUser(false)
 			if (!user) navigate('/login')
 		}
 		isRedirectable()
 	}, [navigate])
+
+	if (validandoUser)
+		return (
+			<div
+				style={{
+					width: '99vw',
+					height: '99vh',
+					display: 'grid',
+					placeItems: 'center',
+				}}
+			>
+				<span aria-busy='true'></span>
+			</div>
+		)
 
 	return (
 		<div className='container' style={{ marginTop: '2rem' }}>
@@ -46,7 +63,7 @@ const Home = () => {
 							href='#'
 							className='secondary'
 							data-target='modal-example'
-							onClick={()=>toggleModal('nav')}
+							onClick={() => toggleModal('nav')}
 						>
 							<svg
 								style={{ fill: '#BBC6CE', width: '24px', height: '24px' }}
@@ -66,11 +83,15 @@ const Home = () => {
 				<ul>
 					<li>
 						<a
-                            href='/'
+							href='/'
 							className='secondary'
 							data-tooltip='Salir'
 							data-placement='left'
-							onClick={() => {supabase.auth.signOut(); toggleModal()}}
+							onClick={() => {
+								supabase.auth.signOut()
+								localStorage.removeItem('sb-clotjbkokdcjqeilzhab-auth-token')
+								toggleModal()
+							}}
 						>
 							<svg
 								xmlns='http://www.w3.org/2000/svg'
@@ -84,35 +105,39 @@ const Home = () => {
 				</ul>
 			</nav>
 			<br />
-			<Link to='/login'>Ve al login</Link>
-			<TasksForm />
-			<TasksList />
+
+			<main>
+				{/* <Link to='/login'>Ve al login</Link> */}
+				<TasksForm />
+				<TasksList />
+			</main>
 
 			<dialog id='modal-example' ref={modal}>
 				<article>
 					<h3>Ups...</h3>
 					<p>
-						Aún no tenemos navbar :v pero tal vez algún día. Solo lo dejo de bonito.
+						Aún no tenemos navbar :v pero tal vez algún día. Solo lo dejo de
+						bonito.
 					</p>
 					<footer>
 						<a
-                            href='#'
+							href='#'
 							role='button'
 							data-target='modal-example'
-							onClick={()=>toggleModal('nav')}
+							onClick={() => toggleModal('nav')}
 						>
 							Ok bro
 						</a>
 					</footer>
 				</article>
 			</dialog>
-            <dialog id='modal-example' ref={exitModal}>
+			<dialog id='modal-example' ref={exitModal}>
 				<article>
-					<p>Saliendo <span aria-busy="true"></span></p>
+					<p>
+						Saliendo <span aria-busy='true'></span>
+					</p>
 				</article>
 			</dialog>
-
-
 		</div>
 	)
 }

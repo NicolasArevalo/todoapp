@@ -13,6 +13,7 @@ export const TaskContextProvider = ({ children }) => {
 	const [tasks, setTasks] = useState([])
 	const [adding, setAdding] = useState()
 	const [loading, setLoading] = useState(false)
+	/* const [deleting, setDeleting] = useState(false) */
 
 	const getUser = async () => {
 		const { data } = await supabase.auth.getUser()
@@ -25,7 +26,7 @@ export const TaskContextProvider = ({ children }) => {
 
 	const getTasks = async (done = false) => {
 		setLoading(true)
-		const { userId, email } = await getUser()
+		const { userId } = await getUser()
 		const { error, data } = await supabase
 			.from('Tareas')
 			.select()
@@ -50,24 +51,66 @@ export const TaskContextProvider = ({ children }) => {
 				data: { user },
 			} = await supabase.auth.getUser()
 
-			const { data, error } = await supabase.from('Tareas').insert({
-				nombre: taskName,
-				userId: user.id,
-			}).select()
+			const { data, error } = await supabase
+				.from('Tareas')
+				.insert({
+					nombre: taskName,
+					userId: user.id,
+				})
+				.select()
 
-			if(error) throw error
+			if (error) throw error
 			setTasks([...tasks, ...data])
 
 			console.log('tarea agregada con exitoso exito')
 		} catch (error) {
 			console.log(error)
-		} finally{
+		} finally {
 			setAdding(false)
 		}
 	}
 
+	const deleteTask = async id => {
+		const { userId } = await getUser()
+
+		const { error, data } = await supabase
+			.from('Tareas')
+			.delete()
+			.eq('userId', userId)
+			.eq('id', id)
+
+		if (error) throw error
+
+		/* Quitar el objeto eliminado del estado */
+		setTasks(tasks.filter(task => task.id !== id))
+	}
+
+	const updateTask = async (id, updateFields) => {
+		const { userId } = await getUser()
+		const { error } = await supabase
+			.from('Tareas')
+			.update(updateFields)
+			.eq('userId', userId)
+			.eq('id', id)
+
+		if (error) throw `Esto es lo que está pasando: ${error}`
+
+		setTasks(tasks.filter(task => task.id !== id))
+	}
+
 	return (
-		<TaskContext.Provider value={{ tasks, getTasks, getUser, createTask, adding, loading }}>
+		<TaskContext.Provider
+			value={{
+				tasks,
+				getTasks,
+				getUser,
+				createTask,
+				adding,
+				loading,
+				deleteTask,
+				updateTask,
+			}}
+		>
 			{children}
 		</TaskContext.Provider>
 	)
