@@ -1,9 +1,9 @@
-import { useRef } from 'react'
+import { useRef, useEffect } from 'react'
 import { useTasks } from '../context/TaskContext'
 
 const TasksForm = () => {
 	const input = useRef('')
-	const { createTask, adding, setCompletadas } = useTasks()
+	const { createTask, adding, setCompletadas, getUser } = useTasks()
 
 	const handleSubmit = async e => {
 		e.preventDefault()
@@ -12,8 +12,15 @@ const TasksForm = () => {
 		createTask(taskName)
 		input.current.value = ''
 	}
+
+	const email = useEffect(() => {
+		const { email } = getUser()
+		return email
+	}, []).split('@')
+
 	return (
 		<div>
+			<p>Hola, {email[0]}</p>
 			<form onSubmit={handleSubmit}>
 				<input
 					type='text'
