@@ -3,8 +3,8 @@ import { useTasks } from '../context/TaskContext'
 import TaskCard from './TaskCard'
 
 const TaskList = () => {
-	const [completadas, setCompletadas] = useState(false)
-	const { tasks, getTasks, getUser, loading, deleteTask, updateTask } =
+	
+	const { tasks, getTasks, getUser, loading, completadas, setCompletadas } =
 		useTasks()
 
 	useEffect(() => {

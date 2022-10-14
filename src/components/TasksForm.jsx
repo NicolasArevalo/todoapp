@@ -3,11 +3,12 @@ import { useTasks } from '../context/TaskContext'
 
 const TasksForm = () => {
 	const input = useRef('')
-	const { createTask, adding } = useTasks()
+	const { createTask, adding, setCompletadas } = useTasks()
 
 	const handleSubmit = async e => {
 		e.preventDefault()
 		const taskName = input.current.value
+		setCompletadas(false)
 		createTask(taskName)
 		input.current.value = ''
 	}

@@ -2,7 +2,7 @@ import { useRef } from 'react'
 import { useTasks } from '../context/TaskContext'
 
 const TaskCard = ({ task }) => {
-    const { id, nombre, completada } = task
+	const { id, nombre, completada } = task
 	const { deleteTask, updateTask } = useTasks()
 
 	const checkbox = useRef(false)
@@ -12,9 +12,8 @@ const TaskCard = ({ task }) => {
 	}
 
 	const handleChecked = id => {
-
 		const checkedOrNot = checkbox.current.checked
-        updateTask(id, { completada: checkedOrNot })
+		updateTask(id, { completada: checkedOrNot })
 	}
 
 	return (
@@ -34,6 +33,8 @@ const TaskCard = ({ task }) => {
 				<svg
 					xmlns='http://www.w3.org/2000/svg'
 					viewBox='0 0 448 512'
+					data-tooltip='Borrar tarea'
+					data-placement='bottom'
 					style={{
 						width: '18px',
 						height: '18px',
@@ -48,16 +49,17 @@ const TaskCard = ({ task }) => {
 				<input
 					type='checkbox'
 					ref={checkbox}
-                    checked={completada ? true:false}
+					checked={completada ? true : false}
+					data-tooltip={`Marcar como ${completada?'incompleta':'completada'}`}
+					data-placement='bottom'
 					onChange={() => handleChecked(id)}
 				></input>
 			</fieldset>
-
-			<footer style={{ float: 'center' }}>
+			{/* <footer style={{ float: 'center' }}>
 				<small style={{ textAlign: 'center' }}>
 					{completada ? 'Completada' : 'Incompleta'}
 				</small>
-			</footer>
+			</footer> */}
 		</article>
 	)
 }

@@ -13,6 +13,7 @@ export const TaskContextProvider = ({ children }) => {
 	const [tasks, setTasks] = useState([])
 	const [adding, setAdding] = useState()
 	const [loading, setLoading] = useState(false)
+	const [completadas, setCompletadas] = useState(false)
 	/* const [deleting, setDeleting] = useState(false) */
 
 	const getUser = async () => {
@@ -109,6 +110,8 @@ export const TaskContextProvider = ({ children }) => {
 				loading,
 				deleteTask,
 				updateTask,
+				completadas,
+				setCompletadas
 			}}
 		>
 			{children}
