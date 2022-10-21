@@ -9,6 +9,7 @@ const TasksForm = () => {
 	
 	async function traerUsuario(){
 		const {email} = await getUser()
+		
 		setEmail(email.split('@')[0])
 	}
 

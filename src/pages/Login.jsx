@@ -1,6 +1,7 @@
 import { useRef, useEffect, useState } from 'react'
 import { supabase } from '../Backend/client'
 import { useNavigate } from 'react-router-dom'
+import { Auth, ThemeSupa } from '@supabase/auth-ui-react'
 
 const Login = () => {
 	const input = useRef('youremail@site.com')
@@ -60,6 +61,7 @@ const Login = () => {
 					display: 'flex',
 					flexDirection: 'column',
 					alignItems: 'center',
+					marginBottom: '0'
 				}}
 			>
 				<hgroup>
@@ -89,12 +91,38 @@ const Login = () => {
 						aria-busy='false'
 						ref={btn}
 						onClick={() => (btn.current.ariaBusy = true)}
-						style={{ width: '50%' }}
+						style={{ width: '100%' }}
 					>
 						Dame mi link mágico
 					</button>
 				</div>
+				<hr />
 			</form>
+			<div
+				style={{
+					display: 'flex',
+					flexDirection: 'column',
+					alignItems: 'center',
+				}}
+			>
+				<Auth
+					supabaseClient={supabase}
+					appearance={{
+						theme: ThemeSupa,
+					}}
+					localization={{
+						variables: {
+							sign_in: {
+								email_label: 'Tu correo',
+								password_label: 'Tu contraseña',
+							},
+						},
+					}}
+					providers={['google', 'facebook', 'twitter']}
+					onlyThirdPartyProviders
+					socialLayout
+				></Auth>
+			</div>
 		</div>
 	)
 }
