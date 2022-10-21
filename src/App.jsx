@@ -31,8 +31,8 @@ function App() {
 
 					<Route path='*' element={<NotFound />} />
 				</Routes>
-				<footer style={{ textAlign: 'center' }}>
-					<small>
+				<footer data-theme='dark' style={{ textAlign: 'center' }}>
+					<small data-theme='dark'>
 						Aplicación creada con
 						<a href='https://es.reactjs.org'> React </a> +
 						<a href='https://supabase.com'> Supabase </a>

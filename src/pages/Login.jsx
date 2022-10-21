@@ -1,7 +1,7 @@
 import { useRef, useEffect, useState } from 'react'
 import { supabase } from '../Backend/client'
 import { useNavigate } from 'react-router-dom'
-import { Auth, ThemeSupa } from '@supabase/auth-ui-react'
+import { Auth, ThemeMinimal, ThemeSupa } from '@supabase/auth-ui-react'
 
 const Login = () => {
 	const input = useRef('youremail@site.com')
@@ -105,10 +105,11 @@ const Login = () => {
 					alignItems: 'center',
 				}}
 			>
+				ó
 				<Auth
 					supabaseClient={supabase}
 					appearance={{
-						theme: ThemeSupa,
+						theme: ThemeMinimal,
 					}}
 					localization={{
 						variables: {
@@ -118,9 +119,9 @@ const Login = () => {
 							},
 						},
 					}}
-					providers={['google', 'facebook', 'twitter']}
+					providers={['google', 'github']}
 					onlyThirdPartyProviders
-					socialLayout
+					socialLayout=''
 				></Auth>
 			</div>
 		</div>

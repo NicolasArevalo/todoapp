@@ -27,6 +27,7 @@ export const TaskContextProvider = ({ children }) => {
 
 	const getTasks = async (done = false) => {
 		setLoading(true)
+
 		const { userId } = await getUser()
 		const { error, data } = await supabase
 			.from('Tareas')
@@ -42,10 +43,11 @@ export const TaskContextProvider = ({ children }) => {
 
 		setLoading(false)
 
+		console.log(data)
 		return data
 	}
 
-	const createTask = async taskName => {
+	const createTask = async (taskName, priority) => {
 		setAdding(true)
 		try {
 			const {
@@ -57,6 +59,7 @@ export const TaskContextProvider = ({ children }) => {
 				.insert({
 					nombre: taskName,
 					userId: user.id,
+					priority: priority
 				})
 				.select()
 
@@ -111,7 +114,7 @@ export const TaskContextProvider = ({ children }) => {
 				deleteTask,
 				updateTask,
 				completadas,
-				setCompletadas
+				setCompletadas,
 			}}
 		>
 			{children}

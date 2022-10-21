@@ -77,7 +77,7 @@ const Home = () => {
 				</ul>
 				<ul>
 					<li>
-						<strong>To-do App</strong>
+						<strong>TodoApp</strong>
 					</li>
 				</ul>
 				<ul>

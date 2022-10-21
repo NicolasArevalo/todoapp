@@ -1,9 +1,10 @@
-import { useRef } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import { useTasks } from '../context/TaskContext'
 
 const TaskCard = ({ task }) => {
-	const { id, nombre, completada } = task
+	const { id, nombre, completada, priority } = task
 	const { deleteTask, updateTask } = useTasks()
+	const [color, setColor] = useState('auto')
 
 	const checkbox = useRef(false)
 
@@ -16,9 +17,21 @@ const TaskCard = ({ task }) => {
 		updateTask(id, { completada: checkedOrNot })
 	}
 
+	const colores = {
+		IyU: '#CC1302',
+		U: '#BFAF34',
+		I: '#00BD45' 
+	}
+
+	useEffect(()=>{
+		if(priority==='IyU') setColor(colores.IyU)
+		if(priority==='U') setColor(colores.U)
+		if(priority==='I') setColor(colores.I)
+	},[])
+
 	return (
-		<article key={id} style={{ position: 'relative' }}>
-			<h4>{nombre}</h4>
+		<article key={id} style={{ position: 'relative', backgroundColor: color }}>
+			<h4 style={{ marginBottom: '0' }}>{nombre}</h4>
 
 			<fieldset
 				style={{
