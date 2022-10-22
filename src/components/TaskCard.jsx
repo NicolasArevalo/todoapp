@@ -74,7 +74,7 @@ const TaskCard = ({ task }) => {
 					data-tooltip={`Marcar como ${
 						completada ? 'incompleta' : 'completada'
 					}`}
-					data-placement='bottom'
+					data-placement='left'
 					onChange={() => handleChecked(id)}
 				></input>
 			</fieldset>
