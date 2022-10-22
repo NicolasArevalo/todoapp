@@ -40,6 +40,12 @@ const Home = () => {
 		isRedirectable()
 	}, [navigate])
 
+	const colores = {
+		IyU: '#CC1302',
+		U: '#BFAF34',
+		I: '#00BD45',
+	}
+
 	if (validandoUser)
 		return (
 			<div
@@ -55,7 +61,10 @@ const Home = () => {
 		)
 
 	return (
-		<div className='container' style={{ marginTop: '2rem' }}>
+		<div
+			className='container'
+			style={{ marginTop: '2rem', overflowX: 'hidden' }}
+		>
 			<nav>
 				<ul>
 					<li>
@@ -65,12 +74,19 @@ const Home = () => {
 							data-target='modal-example'
 							onClick={() => toggleModal('nav')}
 						>
-							<svg
+							{/* <svg
 								style={{ fill: '#BBC6CE', width: '24px', height: '24px' }}
 								xmlns='http://www.w3.org/2000/svg'
 								viewBox='0 0 448 512'
 							>
 								<path d='M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z' />
+							</svg> */}
+							<svg
+								xmlns='http://www.w3.org/2000/svg'
+								viewBox='0 0 512 512'
+								style={{ fill: '#BBC6CE', width: '24px', height: '24px' }}
+							>
+								<path d='M256 512c141.4 0 256-114.6 256-256S397.4 0 256 0S0 114.6 0 256S114.6 512 256 512zM216 336h24V272H216c-13.3 0-24-10.7-24-24s10.7-24 24-24h48c13.3 0 24 10.7 24 24v88h8c13.3 0 24 10.7 24 24s-10.7 24-24 24H216c-13.3 0-24-10.7-24-24s10.7-24 24-24zm40-144c-17.7 0-32-14.3-32-32s14.3-32 32-32s32 14.3 32 32s-14.3 32-32 32z' />
 							</svg>
 						</a>
 					</li>
@@ -112,12 +128,21 @@ const Home = () => {
 				<TasksList />
 			</main>
 
-			<dialog id='modal-example' ref={modal}>
+			<dialog id='modal-example' ref={modal} style={{ width: '80%' }}>
 				<article>
-					<h3>Ups...</h3>
+					<h3>¿Cómo funcionan los colores?</h3>
+					<p>Los colores van así...</p>
 					<p>
-						Aún no tenemos navbar :v pero tal vez algún día. Solo lo dejo de
-						bonito.
+						<span style={{ color: '#CC1302', fontWeight: 'bold' }}>Rojo</span> para las tareas importantes y urgentes.
+					</p>
+					<p>
+						<span style={{ color: '#BFAF34', fontWeight: 'bold' }}>Amarillo</span> para las tareas urgentes pero no importantes.
+					</p>
+					<p>
+						<span style={{ color: '#00BD45', fontWeight: 'bold' }}>Verde</span> para las tareas importantes pero no urgentes.
+					</p>
+					<p>
+						<span style={{ color: '#CCCCC', fontWeight: 'bold' }}>Gris</span> para las tareas no importantes ni urgentes.
 					</p>
 					<footer>
 						<a

@@ -23,7 +23,7 @@ function App() {
 	}, [])
 
 	return (
-		<div className='App'>
+		<>
 			<TaskContextProvider>
 				<Routes>
 					<Route path='/login' element={<Login />} />
@@ -42,7 +42,7 @@ function App() {
 					</small>
 				</footer>
 			</TaskContextProvider>
-		</div>
+		</>
 	)
 }
 

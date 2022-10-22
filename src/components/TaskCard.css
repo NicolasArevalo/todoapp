@@ -1,0 +1,10 @@
+article::before{
+    content: '';
+    width: 8px;
+    height: 100%;
+    background: var(--colorPriority);
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: 4px 0 0 4px;
+}

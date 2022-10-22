@@ -109,7 +109,7 @@ const Login = () => {
 				<Auth
 					supabaseClient={supabase}
 					appearance={{
-						theme: ThemeMinimal,
+						theme: ThemeSupa,
 					}}
 					localization={{
 						variables: {
