@@ -136,7 +136,7 @@ const Home = () => {
 						<span style={{ color: '#CC1302', fontWeight: 'bold' }}>Rojo</span> para las tareas importantes y urgentes.
 					</p>
 					<p>
-						<span style={{ color: '#BFAF34', fontWeight: 'bold' }}>Amarillo</span> para las tareas urgentes pero no importantes.
+						<span style={{ color: '#FFE82F', fontWeight: 'bold' }}>Amarillo</span> para las tareas urgentes pero no importantes.
 					</p>
 					<p>
 						<span style={{ color: '#00BD45', fontWeight: 'bold' }}>Verde</span> para las tareas importantes pero no urgentes.

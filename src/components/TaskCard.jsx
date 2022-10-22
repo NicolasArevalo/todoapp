@@ -23,7 +23,7 @@ const TaskCard = ({ task }) => {
 
 	const colores = {
 		IyU: '#CC1302',
-		U: '#BFAF34',
+		U: '#FFE82F',
 		I: '#00BD45',
 		NN: '#BBBBBB'
 	}
