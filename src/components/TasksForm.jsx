@@ -44,8 +44,8 @@ const TasksForm = () => {
 				<select id='fruit' required ref={inputPriority}>
 					<option value='NN' selected muted>Elige la prioridad</option>
 					<option value='IyU'>Importante y urgente</option>
-					<option value='U'>No importante pero urgente</option>
 					<option value='I'>Importante pero no urgente</option>
+					<option value='U'>No importante pero urgente</option>
 					<option value='NN'>
 						No importante y no urgente
 					</option>
