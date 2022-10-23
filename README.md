@@ -1,7 +1,4 @@
-
-<center>
-    <h1>TODO app</h1>
-</center>
+<h1 align="center">TODO app</h1>
 
 Todo app es una aplicación como te la estás imaginando, entras, guardas tus tareas y así las tienes más pendientes. Pero ¿hay alguna que te haga sentir realmente cómodo? Ahí es donde entra Todo app. 
 
